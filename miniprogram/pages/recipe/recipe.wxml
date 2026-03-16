@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="header" wx:if="{{dishName}}">
+    <text class="dish-name">{{dishName}}</text>
+  </view>
+
+  <view class="section" wx:if="{{ingredients.length > 0}}">
+    <text class="section-title">所需食材</text>
+    <view class="ingredient-list">
+      <view class="ingredient-item" wx:for="{{ingredients}}" wx:key="*this">
+        <text class="ingredient-dot">•</text>
+        <text class="ingredient-text">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section" wx:if="{{steps.length > 0}}">
+    <text class="section-title">制作步骤</text>
+    <view class="step-list">
+      <view class="step-item" wx:for="{{steps}}" wx:for-item="step" wx:key="index">
+        <view class="step-num">{{index + 1}}</view>
+        <text class="step-text">{{step}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && !dishName && !error}}">
+    <text class="empty-text">暂无菜谱数据</text>
+  </view>
+
+  <view class="error" wx:if="{{error}}">
+    <text class="error-text">{{error}}</text>
+  </view>
+
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+</view>

@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="header">
+    <text class="title">拍一拍，识菜谱</text>
+    <text class="subtitle">拍摄或选择菜品照片，获取食材与做法</text>
+  </view>
+
+  <view class="actions">
+    <view class="action-btn primary" bindtap="onChooseImage" data-source="camera">
+      <text class="action-icon">📷</text>
+      <text class="action-text">拍照识别</text>
+    </view>
+    <view class="action-btn secondary" bindtap="onChooseImage" data-source="album">
+      <text class="action-icon">🖼️</text>
+      <text class="action-text">从相册选择</text>
+    </view>
+  </view>
+
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">正在识别中...</text>
+  </view>
+
+  <view class="error-wrap" wx:if="{{error}}">
+    <text class="error-text">{{error}}</text>
+    <text class="error-tip">请换一张更清晰的菜品照片重试，或检查网络连接</text>
+    <view class="error-actions">
+      <view class="btn-retry" bindtap="clearError">知道了</view>
+    </view>
+  </view>
+</view>
