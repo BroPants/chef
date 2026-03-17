@@ -16,11 +16,13 @@ chef/
 
 ## 快速开始
 
+> **Windows 用户**：为与系统环境隔离，建议先按 [Windows 环境配置说明](docs/SETUP-WINDOWS.md) 安装 Node 版本管理器（fnm/nvm-windows）后再执行下列步骤。
+
 ### 1. 启动后端
 
 ```bash
 cd server
-cp .env.example .env   # 可选：配置微信 AppID/Secret 用于登录
+cp .env.example .env   # 可选：配置微信 AppID/Secret 用于登录（Windows: copy .env.example .env）
 npm install
 npm run dev
 ```
