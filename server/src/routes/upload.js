@@ -11,7 +11,9 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename(req, file, cb) {
-    const ext = (file.originalname || file.mimetype || '').split('.').pop() || 'jpg';
+    const extFromName = (file.originalname || '').split('.').pop();
+    const extFromMime = (file.mimetype || '').split('/').pop();
+    const ext = (extFromName && extFromName !== file.originalname ? extFromName : extFromMime) || 'jpg';
     const name = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}.${ext}`;
     cb(null, name);
   }
@@ -19,10 +21,17 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage,
-  limits: { fileSize: 2 * 1024 * 1024 }
+  limits: { fileSize: 10 * 1024 * 1024 }
 });
 
-router.post('/upload', upload.single('image'), (req, res) => {
+router.post('/upload', (req, res, next) => {
+  upload.single('image')(req, res, (err) => {
+    if (err) {
+      return res.status(400).json({ success: false, message: err.message || '上传失败' });
+    }
+    next();
+  });
+}, (req, res) => {
   if (!req.file) {
     return res.status(400).json({ success: false, message: '未收到图片' });
   }

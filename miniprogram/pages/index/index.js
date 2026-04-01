@@ -1,4 +1,3 @@
-const app = getApp();
 const { request, uploadImage, recognizeDish } = require('../../utils/api');
 
 Page({
@@ -8,7 +7,7 @@ Page({
   },
 
   onLoad() {
-    app.checkLogin();
+    getApp().checkLogin();
   },
 
   onChooseImage(e) {

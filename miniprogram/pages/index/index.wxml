@@ -4,7 +4,7 @@
     <text class="subtitle">拍摄或选择菜品照片，获取食材与做法</text>
   </view>
 
-  <view class="actions">
+  <view class="actions" wx:if="{{!loading}}">
     <view class="action-btn primary" bindtap="onChooseImage" data-source="camera">
       <text class="action-icon">📷</text>
       <text class="action-text">拍照识别</text>

@@ -1,5 +1,4 @@
 const express = require('express');
-const { getRecipe } = require('../services/recipe');
 const { recognizeDish } = require('../services/ai');
 
 const router = express.Router();
@@ -11,22 +10,10 @@ router.post('/recognize', async (req, res) => {
   }
 
   try {
-    const dishName = await recognizeDish(imageUrl);
-    if (!dishName) {
-      return res.json({
-        success: false,
-        message: '未能识别菜品，请换一张更清晰的图片重试'
-      });
-    }
-
-    const recipe = getRecipe(dishName);
-    res.json({
-      success: true,
-      dishName,
-      recipe: recipe || { ingredients: [], steps: [] }
-    });
+    const result = await recognizeDish(imageUrl);
+    res.json(result);
   } catch (err) {
-    console.error('recognize error:', err);
+    console.error('recognize error:', err.message);
     res.status(500).json({
       success: false,
       message: err.message || '识别服务异常，请稍后重试'

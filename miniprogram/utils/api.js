@@ -1,8 +1,7 @@
-const app = getApp();
-
 function getBaseUrl() {
   const config = require('./config.js');
-  return app.globalData?.baseUrl || config.baseUrl || 'http://localhost:3000';
+  const app = getApp();
+  return app?.globalData?.baseUrl || config.baseUrl || 'http://localhost:3000';
 }
 
 function request(options) {
@@ -36,7 +35,13 @@ function uploadImage(filePath) {
       filePath,
       name: 'image',
       success(res) {
-        const data = JSON.parse(res.data);
+        let data;
+        try {
+          data = typeof res.data === 'string' ? JSON.parse(res.data) : res.data;
+        } catch (e) {
+          reject(new Error('后端服务未启动或返回异常，请先运行 npm run dev'));
+          return;
+        }
         if (res.statusCode >= 200 && res.statusCode < 300 && data.url) {
           resolve(data);
         } else {
