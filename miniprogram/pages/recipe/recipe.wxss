@@ -162,3 +162,70 @@
   font-size: 28rpx;
   color: #888;
 }
+
+/* ── 相关教程 ── */
+.section-hint {
+  display: block;
+  font-size: 22rpx;
+  color: #aaaaaa;
+  margin-bottom: 20rpx;
+  margin-top: -16rpx;
+}
+
+.content-card {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  border: 1rpx solid #f0ede8;
+  padding: 24rpx;
+  margin-bottom: 12rpx;
+}
+
+.content-card--hover {
+  background: #f9f7f5;
+}
+
+.platform-badge {
+  flex-shrink: 0;
+  font-size: 20rpx;
+  font-weight: 600;
+  padding: 6rpx 14rpx;
+  border-radius: 8rpx;
+  letter-spacing: 0.04em;
+}
+
+.platform-bili {
+  background: #e8f0ff;
+  color: #1a5fcc;
+}
+
+.platform-xhs {
+  background: #ffe8e8;
+  color: #cc2222;
+}
+
+.content-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.content-title {
+  font-size: 24rpx;
+  color: #333333;
+  line-height: 1.5;
+}
+
+.content-author {
+  font-size: 20rpx;
+  color: #aaaaaa;
+}
+
+.content-arrow {
+  font-size: 36rpx;
+  color: #cccccc;
+  flex-shrink: 0;
+}

@@ -3,10 +3,12 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
-const multer = require('multer');
 const authRouter = require('./routes/auth');
 const uploadRouter = require('./routes/upload');
 const recognizeRouter = require('./routes/recognize');
+const recommendationsRouter = require('./routes/recommendations');
+const contentRouter = require('./routes/content');
+const suggestRouter = require('./routes/suggest');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,6 +26,10 @@ app.use('/uploads', express.static(uploadDir));
 app.use('/api/auth', authRouter);
 app.use('/api', uploadRouter);
 app.use('/api', recognizeRouter);
+app.use('/api/recommendations', recommendationsRouter);
+app.use('/api/content', contentRouter);
+app.use('/api/suggest', suggestRouter);
+app.use('/api', suggestRouter); // /api/recipe 也在 suggest 路由中
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', service: 'chef-server' });

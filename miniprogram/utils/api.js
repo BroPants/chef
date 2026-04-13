@@ -73,10 +73,53 @@ async function login(code) {
   });
 }
 
+/**
+ * 获取每日随机推荐菜品
+ * @param {string} [excludeId] 上次推荐的菜品 id，用于避免连续重复
+ */
+function getDailyRecommendation(excludeId) {
+  const url = excludeId
+    ? `/api/recommendations/daily?exclude=${excludeId}`
+    : '/api/recommendations/daily';
+  return request({ url });
+}
+
+/**
+ * 获取菜品的外部教程链接（B站 + 小红书）
+ * @param {string} dishName 菜品名
+ */
+function getExternalContent(dishName) {
+  return request({ url: `/api/content/external?dish=${encodeURIComponent(dishName)}` });
+}
+
+/**
+ * 根据食材列表推荐菜品
+ * @param {string[]} ingredients 食材名称数组
+ */
+function suggestByIngredients(ingredients) {
+  return request({
+    url: '/api/suggest/by-ingredients',
+    method: 'POST',
+    data: { ingredients }
+  });
+}
+
+/**
+ * 根据菜品名获取菜谱（本地库优先，miss 后 AI 生成）
+ * @param {string} dishName 菜品名
+ */
+function getRecipeByName(dishName) {
+  return request({ url: `/api/recipe?dish=${encodeURIComponent(dishName)}` });
+}
+
 module.exports = {
   request,
   uploadImage,
   recognizeDish,
   login,
-  getBaseUrl
+  getBaseUrl,
+  getDailyRecommendation,
+  getExternalContent,
+  suggestByIngredients,
+  getRecipeByName
 };

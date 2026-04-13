@@ -1,0 +1,266 @@
+.page {
+  background: #fafaf8;
+  min-height: 100vh;
+  padding: 32rpx 32rpx 80rpx;
+  box-sizing: border-box;
+}
+
+/* ── 通用区块标签 ── */
+.section-label {
+  display: block;
+  font-size: 20rpx;
+  font-weight: 500;
+  color: #aaaaaa;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 20rpx;
+}
+
+/* ── 食材输入区 ── */
+.input-section {
+  background: #ffffff;
+  border-radius: 28rpx;
+  border: 1rpx solid #e0ddd8;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+}
+
+.ingredient-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-bottom: 24rpx;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  background: #e8f0e5;
+  border-radius: 40rpx;
+  padding: 10rpx 20rpx;
+}
+
+.chip:active {
+  background: #d4e6d0;
+}
+
+.chip-text {
+  font-size: 24rpx;
+  color: #2d5a27;
+  font-weight: 500;
+}
+
+.chip-del {
+  font-size: 24rpx;
+  color: #2d5a27;
+  opacity: 0.6;
+  line-height: 1;
+}
+
+.empty-hint {
+  display: block;
+  font-size: 24rpx;
+  color: #cccccc;
+  margin-bottom: 20rpx;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  background: #f5f3f0;
+  border-radius: 16rpx;
+  padding: 0 16rpx;
+}
+
+.ingredient-input {
+  flex: 1;
+  height: 80rpx;
+  font-size: 28rpx;
+  color: #111111;
+}
+
+.input-placeholder {
+  color: #cccccc;
+}
+
+.add-btn {
+  flex-shrink: 0;
+  height: 56rpx;
+  line-height: 56rpx;
+  padding: 0 24rpx;
+  background: #2d5a27;
+  color: #ffffff;
+  font-size: 26rpx;
+  font-weight: 500;
+  border-radius: 12rpx;
+}
+
+.add-btn--disabled {
+  background: #cccccc;
+}
+
+/* ── 查找按钮 ── */
+.search-btn {
+  background: #2d5a27;
+  border-radius: 20rpx;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40rpx;
+}
+
+.search-btn--disabled {
+  background: #c8c8c8;
+}
+
+.search-btn-text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 1rpx;
+}
+
+/* ── 骨架屏 ── */
+.skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.skeleton-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 32rpx;
+  border: 1rpx solid #e8e5e0;
+}
+
+.skeleton-title {
+  height: 32rpx;
+  width: 40%;
+  background: #f0ede8;
+  border-radius: 8rpx;
+  margin-bottom: 16rpx;
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+.skeleton-desc {
+  height: 22rpx;
+  width: 75%;
+  background: #f5f3f0;
+  border-radius: 6rpx;
+  margin-bottom: 20rpx;
+  animation: shimmer 1.2s ease-in-out 0.1s infinite;
+}
+
+.skeleton-tags {
+  height: 22rpx;
+  width: 55%;
+  background: #f5f3f0;
+  border-radius: 6rpx;
+  animation: shimmer 1.2s ease-in-out 0.2s infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ── 错误提示 ── */
+.error-wrap {
+  text-align: center;
+  padding: 40rpx 0;
+}
+
+.error-text {
+  display: block;
+  font-size: 28rpx;
+  color: #cf1322;
+  margin-bottom: 24rpx;
+  line-height: 1.6;
+}
+
+.retry-btn {
+  display: inline-block;
+  padding: 16rpx 48rpx;
+  font-size: 26rpx;
+  color: #2d5a27;
+  border: 1rpx solid #2d5a27;
+  border-radius: 8rpx;
+}
+
+/* ── 推荐结果 ── */
+.results-section {
+  margin-top: 8rpx;
+}
+
+.dish-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  border: 1rpx solid #e8e5e0;
+  padding: 28rpx 32rpx;
+  margin-bottom: 16rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.dish-card--hover {
+  background: #f5f2ed;
+}
+
+.dish-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.dish-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #111111;
+}
+
+.dish-desc {
+  font-size: 22rpx;
+  color: #888888;
+  line-height: 1.5;
+}
+
+.dish-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  margin-top: 12rpx;
+}
+
+.matched-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+}
+
+.matched-chip {
+  background: #e8f0e5;
+  border-radius: 20rpx;
+  padding: 4rpx 14rpx;
+}
+
+.matched-text {
+  font-size: 20rpx;
+  color: #3a6b34;
+}
+
+.missing-hint {
+  font-size: 20rpx;
+  color: #f0a020;
+}
+
+.dish-arrow {
+  font-size: 40rpx;
+  color: #cccccc;
+  flex-shrink: 0;
+}

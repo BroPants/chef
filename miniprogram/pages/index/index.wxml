@@ -45,7 +45,6 @@
       <text class="action-arrow">›</text>
     </view>
 
-    <!-- 分割线 -->
     <view class="row-divider"></view>
 
     <!-- 从相册选择 -->
@@ -68,6 +67,24 @@
 
   </view>
 
+  <!-- 食材找菜入口 -->
+  <view
+    class="suggest-entry"
+    bindtap="onSuggestTap"
+    hover-class="suggest-entry--hover"
+    hover-stay-time="100"
+    wx:if="{{!loading}}"
+  >
+    <view class="suggest-icon-wrap">
+      <text class="suggest-icon">🔍</text>
+    </view>
+    <view class="suggest-texts">
+      <text class="suggest-title">食材找菜</text>
+      <text class="suggest-desc">告诉我有什么，帮你想吃什么</text>
+    </view>
+    <text class="action-arrow">›</text>
+  </view>
+
   <!-- 加载状态 -->
   <view class="loading-wrap" wx:if="{{loading}}">
     <view class="loading-spinner"></view>
@@ -83,9 +100,45 @@
     </view>
   </view>
 
+  <!-- 每日推荐卡片 -->
+  <view class="rec-section" wx:if="{{!loading}}">
+    <text class="section-label">今日灵感</text>
+
+    <!-- 加载中骨架 -->
+    <view class="rec-card rec-skeleton" wx:if="{{recLoading}}">
+      <view class="rec-img-skeleton"></view>
+      <view class="rec-info-skeleton">
+        <view class="skeleton-line w60"></view>
+        <view class="skeleton-line w40"></view>
+      </view>
+    </view>
+
+    <!-- 推荐内容 -->
+    <view class="rec-card" wx:elif="{{rec}}" bindtap="onRecTap" hover-class="rec-card--hover" hover-stay-time="100">
+      <image class="rec-img" src="{{rec.image}}" mode="aspectFill" lazy-load/>
+      <view class="rec-info">
+        <view class="rec-header">
+          <text class="rec-name">{{rec.name}}</text>
+          <view class="refresh-btn" catchtap="onRecRefresh">
+            <text class="refresh-text">换一换</text>
+          </view>
+        </view>
+        <text class="rec-desc">{{rec.description}}</text>
+        <view class="rec-tags">
+          <view class="rec-tag">
+            <text class="rec-tag-text">🕐 {{rec.duration}}</text>
+          </view>
+          <view class="rec-tag">
+            <text class="rec-tag-text">⚡ {{rec.difficulty}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
   <!-- 最近识别 -->
   <view class="recent-section" wx:if="{{history.length > 0 && !loading}}">
-    <text class="recent-label">最近识别</text>
+    <text class="section-label">最近识别</text>
     <view class="chip-list">
       <view
         class="chip"

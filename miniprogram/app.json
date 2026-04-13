@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/recipe/recipe"
+    "pages/recipe/recipe",
+    "pages/suggest/suggest"
   ],
   "window": {
     "navigationBarBackgroundColor": "#fafaf8",

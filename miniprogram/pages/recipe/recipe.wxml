@@ -1,8 +1,22 @@
 <view class="container">
+
+  <!-- 菜品名 -->
   <view class="header" wx:if="{{dishName}}">
     <text class="dish-name">{{dishName}}</text>
   </view>
 
+  <!-- 加载中 -->
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 错误 -->
+  <view class="error" wx:if="{{error}}">
+    <text class="error-text">{{error}}</text>
+  </view>
+
+  <!-- 食材列表 -->
   <view class="section" wx:if="{{baseIngredients.length > 0}}">
     <view class="section-header">
       <text class="section-title">所需食材</text>
@@ -20,6 +34,7 @@
     </view>
   </view>
 
+  <!-- 制作步骤 -->
   <view class="section" wx:if="{{steps.length > 0}}">
     <text class="section-title">制作步骤</text>
     <view class="step-list">
@@ -30,16 +45,51 @@
     </view>
   </view>
 
+  <!-- 相关教程 -->
+  <view class="section" wx:if="{{!loading && (externalContent.bilibili.length > 0 || externalContent.xiaohongshu.length > 0)}}">
+    <text class="section-title">相关教程</text>
+    <text class="section-hint">点击卡片复制链接，在浏览器中打开</text>
+
+    <!-- B站 -->
+    <view
+      class="content-card"
+      wx:for="{{externalContent.bilibili}}"
+      wx:key="index"
+      bindtap="onExternalTap"
+      data-url="{{item.url}}"
+      hover-class="content-card--hover"
+      hover-stay-time="100"
+    >
+      <view class="platform-badge platform-bili">B站</view>
+      <view class="content-info">
+        <text class="content-title">{{item.title}}</text>
+        <text class="content-author">{{item.author}}</text>
+      </view>
+      <text class="content-arrow">›</text>
+    </view>
+
+    <!-- 小红书 -->
+    <view
+      class="content-card"
+      wx:for="{{externalContent.xiaohongshu}}"
+      wx:key="index"
+      bindtap="onExternalTap"
+      data-url="{{item.url}}"
+      hover-class="content-card--hover"
+      hover-stay-time="100"
+    >
+      <view class="platform-badge platform-xhs">小红书</view>
+      <view class="content-info">
+        <text class="content-title">{{item.title}}</text>
+        <text class="content-author">{{item.author}}</text>
+      </view>
+      <text class="content-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 空态 -->
   <view class="empty" wx:if="{{!loading && !dishName && !error}}">
     <text class="empty-text">暂无菜谱数据</text>
   </view>
 
-  <view class="error" wx:if="{{error}}">
-    <text class="error-text">{{error}}</text>
-  </view>
-
-  <view class="loading-wrap" wx:if="{{loading}}">
-    <view class="loading-spinner"></view>
-    <text class="loading-text">加载中...</text>
-  </view>
 </view>

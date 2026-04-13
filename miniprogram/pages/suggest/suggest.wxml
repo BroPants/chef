@@ -1,0 +1,99 @@
+<view class="page">
+
+  <!-- 食材输入区 -->
+  <view class="input-section">
+    <text class="section-label">已添加食材</text>
+
+    <!-- 已添加的食材 chips -->
+    <view class="ingredient-chips" wx:if="{{ingredients.length > 0}}">
+      <view
+        class="chip"
+        wx:for="{{ingredients}}"
+        wx:key="index"
+        bindtap="removeIngredient"
+        data-index="{{index}}"
+      >
+        <text class="chip-text">{{item}}</text>
+        <text class="chip-del">×</text>
+      </view>
+    </view>
+    <text class="empty-hint" wx:else>输入食材后点击「添加」</text>
+
+    <!-- 输入行 -->
+    <view class="input-row">
+      <input
+        class="ingredient-input"
+        placeholder="如：番茄、鸡蛋、土豆…"
+        placeholder-class="input-placeholder"
+        value="{{inputValue}}"
+        bindinput="onInput"
+        bindconfirm="addIngredient"
+        maxlength="20"
+        confirm-type="done"
+      />
+      <view
+        class="add-btn {{inputValue.trim() ? '' : 'add-btn--disabled'}}"
+        bindtap="addIngredient"
+      >
+        添加
+      </view>
+    </view>
+  </view>
+
+  <!-- 查找按钮 -->
+  <view
+    class="search-btn {{ingredients.length > 0 && !loading ? '' : 'search-btn--disabled'}}"
+    bindtap="onSearch"
+  >
+    <text class="search-btn-text">{{loading ? '正在推荐…' : '开始查找'}}</text>
+  </view>
+
+  <!-- 加载骨架 -->
+  <view class="skeleton-list" wx:if="{{loading}}">
+    <view class="skeleton-card" wx:for="{{[1,2,3,4]}}" wx:key="*this">
+      <view class="skeleton-title"></view>
+      <view class="skeleton-desc"></view>
+      <view class="skeleton-tags"></view>
+    </view>
+  </view>
+
+  <!-- 错误提示 -->
+  <view class="error-wrap" wx:if="{{error && !loading}}">
+    <text class="error-text">{{error}}</text>
+    <view class="retry-btn" bindtap="onSearch">重试</view>
+  </view>
+
+  <!-- 推荐结果 -->
+  <view class="results-section" wx:if="{{dishes.length > 0 && !loading}}">
+    <text class="section-label">为你推荐</text>
+
+    <view
+      class="dish-card"
+      wx:for="{{dishes}}"
+      wx:key="name"
+      bindtap="onDishTap"
+      data-name="{{item.name}}"
+      hover-class="dish-card--hover"
+      hover-stay-time="100"
+    >
+      <view class="dish-main">
+        <text class="dish-name">{{item.name}}</text>
+        <text class="dish-desc">{{item.description}}</text>
+      </view>
+
+      <view class="dish-meta">
+        <!-- 匹配食材 -->
+        <view class="matched-chips" wx:if="{{item.matchedIngredients.length > 0}}">
+          <view class="matched-chip" wx:for="{{item.matchedIngredients}}" wx:key="*this" wx:for-item="ing">
+            <text class="matched-text">{{ing}}</text>
+          </view>
+        </view>
+        <!-- 缺少食材提示 -->
+        <text class="missing-hint" wx:if="{{item.missingKey}}">还差 {{item.missingKey}}</text>
+      </view>
+
+      <text class="dish-arrow">›</text>
+    </view>
+  </view>
+
+</view>
