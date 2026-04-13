@@ -4,10 +4,10 @@
     "pages/recipe/recipe"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#1a5f2a",
+    "navigationBarBackgroundColor": "#fafaf8",
     "navigationBarTitleText": "Chef",
-    "navigationBarTextStyle": "white",
-    "backgroundColor": "#f5f5f5"
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#fafaf8"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

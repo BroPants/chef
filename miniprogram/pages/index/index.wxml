@@ -1,25 +1,80 @@
-<view class="container">
-  <view class="header">
-    <text class="title">拍一拍，识菜谱</text>
-    <text class="subtitle">拍摄或选择菜品照片，获取食材与做法</text>
+<!-- 自定义导航栏 -->
+<view class="nav-bar" style="padding-top: {{statusBarHeight}}px;">
+  <view class="nav-content">
+    <text class="nav-logo">CHEF</text>
+    <text class="nav-more">···</text>
+  </view>
+</view>
+
+<!-- 主内容区 -->
+<view class="body">
+
+  <!-- 功能标签 Pill -->
+  <view class="pill">AI 识菜</view>
+
+  <!-- 主标题 -->
+  <view class="title-block">
+    <text class="title">拍一张，</text>
+    <text class="title">学一道菜</text>
   </view>
 
-  <view class="actions" wx:if="{{!loading}}">
-    <view class="action-btn primary" bindtap="onChooseImage" data-source="camera">
-      <text class="action-icon">📷</text>
-      <text class="action-text">拍照识别</text>
-    </view>
-    <view class="action-btn secondary" bindtap="onChooseImage" data-source="album">
-      <text class="action-icon">🖼️</text>
-      <text class="action-text">从相册选择</text>
-    </view>
+  <!-- 副标题 -->
+  <view class="subtitle-block">
+    <text class="subtitle">拍摄或选择菜品照片</text>
+    <text class="subtitle">自动识别食材与做法</text>
   </view>
 
+  <!-- 操作入口卡片 -->
+  <view class="action-card" wx:if="{{!loading}}">
+
+    <!-- 拍照识别 -->
+    <view
+      class="action-row"
+      bindtap="onChooseImage"
+      data-source="camera"
+      hover-class="action-row--hover"
+      hover-stay-time="100"
+    >
+      <view class="icon-wrap icon-dark">
+        <image class="icon-img" src="/assets/icon-camera.svg" mode="aspectFit"/>
+      </view>
+      <view class="action-texts">
+        <text class="action-title">拍照识别</text>
+        <text class="action-desc">实时拍摄菜品</text>
+      </view>
+      <text class="action-arrow">›</text>
+    </view>
+
+    <!-- 分割线 -->
+    <view class="row-divider"></view>
+
+    <!-- 从相册选择 -->
+    <view
+      class="action-row"
+      bindtap="onChooseImage"
+      data-source="album"
+      hover-class="action-row--hover"
+      hover-stay-time="100"
+    >
+      <view class="icon-wrap icon-warm">
+        <image class="icon-img" src="/assets/icon-gallery.svg" mode="aspectFit"/>
+      </view>
+      <view class="action-texts">
+        <text class="action-title">从相册选择</text>
+        <text class="action-desc">上传已有照片</text>
+      </view>
+      <text class="action-arrow">›</text>
+    </view>
+
+  </view>
+
+  <!-- 加载状态 -->
   <view class="loading-wrap" wx:if="{{loading}}">
     <view class="loading-spinner"></view>
     <text class="loading-text">正在识别中...</text>
   </view>
 
+  <!-- 错误提示 -->
   <view class="error-wrap" wx:if="{{error}}">
     <text class="error-text">{{error}}</text>
     <text class="error-tip">请换一张更清晰的菜品照片重试，或检查网络连接</text>
@@ -27,4 +82,23 @@
       <view class="btn-retry" bindtap="clearError">知道了</view>
     </view>
   </view>
+
+  <!-- 最近识别 -->
+  <view class="recent-section" wx:if="{{history.length > 0 && !loading}}">
+    <text class="recent-label">最近识别</text>
+    <view class="chip-list">
+      <view
+        class="chip"
+        wx:for="{{history}}"
+        wx:key="index"
+        bindtap="onHistoryTap"
+        data-index="{{index}}"
+        hover-class="chip--hover"
+        hover-stay-time="100"
+      >
+        <text class="chip-text">{{item.dishName}}</text>
+      </view>
+    </view>
+  </view>
+
 </view>

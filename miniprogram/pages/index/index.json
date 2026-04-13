@@ -1,4 +1,4 @@
 {
-  "navigationBarTitleText": "Chef",
+  "navigationStyle": "custom",
   "usingComponents": {}
 }
