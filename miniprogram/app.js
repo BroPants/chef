@@ -5,7 +5,8 @@ App({
   globalData: {
     userInfo: null,
     openid: null,
-    baseUrl: config.baseUrl
+    envVersion: config.getEnvVersion(),
+    baseUrl: config.getRuntimeBaseUrl()
   },
   onLaunch() {
     this.checkLogin();

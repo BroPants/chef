@@ -1,7 +1,7 @@
 function getBaseUrl() {
   const config = require('./config.js');
   const app = getApp();
-  return app?.globalData?.baseUrl || config.baseUrl || 'http://localhost:3000';
+  return app?.globalData?.baseUrl || config.getRuntimeBaseUrl() || 'http://localhost:3000';
 }
 
 function request(options) {

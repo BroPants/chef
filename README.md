@@ -32,11 +32,23 @@ npm run dev
 ### 2. 启动小程序
 
 1. 使用 [微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html) 打开 `miniprogram` 目录
-2. 在 `miniprogram/utils/config.js` 中确认 `baseUrl` 指向后端地址（默认 `http://localhost:3000`）
+2. 在 `miniprogram/utils/config.js` 中确认接口地址配置：
+   - `develop`：本机联调地址，默认 `http://localhost:3000`
+   - `trial`：小范围内测用的公网 HTTPS 地址
+   - `release`：正式环境地址
 3. 开发者工具中勾选「不校验合法域名」以便本地调试
 4. 编译运行
 
-### 3. 配置微信登录（可选）
+### 3. 小范围内测
+
+如果要把体验版发给其他微信用户试用：
+
+1. 先把后端通过云服务器或内网穿透暴露成公网 `https` 地址
+2. 将 `miniprogram/utils/config.js` 里的 `trial` 改成该公网地址
+3. 重新上传小程序体验版
+4. 在微信公众平台添加体验成员并分发体验版二维码
+
+### 4. 配置微信登录（可选）
 
 在 `server/.env` 中填写：
 
